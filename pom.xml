@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.endless</groupId>
+    <artifactId>endless-sg</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>A service governance platform.</description>
+    <url></url>
+
+    <modules>
+        <module>endless-sg-core</module>
+        <module>endless-sg-clients</module>
+        <module>endless-sg-examples</module>
+        <module>endless-sg-admin</module>
+    </modules>
+
+    <developers>
+        <developer>
+            <name>lijinfeng</name>
+            <email>lijinfengnuc@gmail.com</email>
+            <url>https://lijinfengnuc.github.io/</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <revision>0.0.1-SNAPSHOT</revision>
+        <slf4j-api.version>1.7.32</slf4j-api.version>
+        <log4j-slf4j-impl.version>2.13.3</log4j-slf4j-impl.version>
+        <log4j-core.version>2.13.3</log4j-core.version>
+        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--endless-sg-->
+            <dependency>
+                <groupId>org.endless</groupId>
+                <artifactId>endless-sg-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <!--slf4j-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <!--log4j2-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j-slf4j-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j-core.version}</version>
+            </dependency>
+            <!--junit-->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License version 3</name>
+            <url>https://opensource.org/licenses/GPL-3.0</url>
+        </license>
+    </licenses>
+
+</project>
