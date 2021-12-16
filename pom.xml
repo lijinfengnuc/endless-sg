@@ -11,7 +11,7 @@
 
     <name>${project.artifactId}</name>
     <description>A service governance platform.</description>
-    <url></url>
+    <url>https://www.sg.endless.org</url>
 
     <modules>
         <module>endless-sg-core</module>
@@ -32,10 +32,12 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <revision>0.0.1-SNAPSHOT</revision>
+        <!--依赖版本号-->
         <slf4j-api.version>1.7.32</slf4j-api.version>
         <log4j-slf4j-impl.version>2.13.3</log4j-slf4j-impl.version>
         <log4j-core.version>2.13.3</log4j-core.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <hutool-all.version>5.7.16</hutool-all.version>
     </properties>
 
     <dependencyManagement>
@@ -45,6 +47,12 @@
                 <groupId>org.endless</groupId>
                 <artifactId>endless-sg-core</artifactId>
                 <version>${revision}</version>
+            </dependency>
+            <!--hutool-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
             </dependency>
             <!--slf4j-->
             <dependency>

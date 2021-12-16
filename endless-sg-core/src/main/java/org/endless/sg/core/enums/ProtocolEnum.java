@@ -18,22 +18,22 @@ public enum ProtocolEnum {
      */
     private final String code;
     /**
-     * 协议描述
+     * 协议名称
      */
-    private final String desc;
+    private final String name;
 
 
-    ProtocolEnum(String code, String desc) {
+    ProtocolEnum(String code, String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 
     public String getCode() {
         return code;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getName() {
+        return name;
     }
 
 }
