@@ -39,7 +39,6 @@ public final class ServerAddressConfig {
      */
     private String domainName;
 
-
     public ServerAddressConfig(String serverAddress) {
          if (PATTERN_IP_PORT.matcher(serverAddress).matches()) {
             //IP:PORT格式

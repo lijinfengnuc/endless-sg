@@ -12,22 +12,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public final class SgConfig {
-
-    /**
-     * appName/appGroupName最小长度
-     */
-    private static final int LENGTH_MIN_NAME = 1;
-
-    /**
-     * appName/appGroupName最大长度
-     */
-    private static final int LENGTH_MAX_NAME  = 50;
-
-    /**
-     * appName/appGroupName正则表达式
-     */
-    private static final Pattern PATTERN_NAME = Pattern.compile("^[A-Za-z0-9_-]{1,50}$");
+public class ServerConfig {
 
     /**
      * 服务端地址IP:PORT格式最大个数
@@ -54,7 +39,7 @@ public final class SgConfig {
     private static final int LENGTH_MIN_TOKEN  = 5;
 
     /**
-     * token最小长度
+     * token最大长度
      */
     private static final int LENGTH_MAX_TOKEN  = 1000;
 
@@ -62,20 +47,6 @@ public final class SgConfig {
      * token正则表达式
      */
     private static final Pattern PATTERN_TOKEN = Pattern.compile("^[A-Za-z0-9]{5,1000}$");
-
-    /**
-     * 应用名称
-     * 不可为null
-     * 1-50个字符，只能是数字、字母、—、_
-     */
-    private String appName;
-
-    /**
-     * 应用组名称
-     * 可为null
-     * 1-50个字符，只能是数字、字母、—、_
-     */
-    private String appGroupName;
 
     /**
      * 服务端地址集合
@@ -104,17 +75,8 @@ public final class SgConfig {
      */
     private Set<ServerAddressConfig> serverAddressConfigs;
 
+    private ServerConfig() {
 
-    private SgConfig() {
-
-    }
-
-    public String getAppName() {
-        return appName;
-    }
-
-    public String getAppGroupName() {
-        return appGroupName;
     }
 
     public String getServerAddresses() {
@@ -133,27 +95,11 @@ public final class SgConfig {
         return serverAddressConfigs;
     }
 
-    public static SgConfigBuilder builder() {
-        return new SgConfigBuilder();
+    public static ServerConfigBuilder builder() {
+        return new ServerConfigBuilder();
     }
 
-
-    public static class SgConfigBuilder {
-
-        /**
-         * 应用名称
-         * 不可为null
-         * 1-50个字符，只能是数字、字母、—、_
-         */
-        private String appName;
-
-        /**
-         * 应用组名称
-         * 可为null
-         * 1-50个字符，只能是数字、字母、—、_
-         */
-        private String appGroupName;
-
+    public static class ServerConfigBuilder {
         /**
          * 服务端地址集合
          * 不可为null
@@ -181,69 +127,33 @@ public final class SgConfig {
          */
         private Set<ServerAddressConfig> serverAddressConfigs;
 
-
-        public SgConfigBuilder appName(String appName) {
-            this.appName = appName;
-            return this;
-        }
-
-        public SgConfigBuilder appGroupName(String appGroupName) {
-            this.appGroupName = appGroupName;
-            return this;
-        }
-
-        public SgConfigBuilder serverAddress(String serverAddresses) {
+        public ServerConfigBuilder serverAddress(String serverAddresses) {
             this.serverAddresses  = serverAddresses;
             return this;
         }
 
-        public SgConfigBuilder protocol(String protocol) {
+        public ServerConfigBuilder protocol(String protocol) {
             this.protocol = protocol;
             return this;
         }
 
-        public SgConfigBuilder token(String token) {
+        public ServerConfigBuilder token(String token) {
             this.token = token;
             return this;
         }
 
-        public SgConfig build() {
+        public ServerConfig build() {
             //校验参数
-            validateAppName(this.appName);
-            validateAppGroupName(this.appGroupName);
             validateServerAddresses(this.serverAddresses);
             validateProtocol(this.protocol);
             validateToken(this.token);
             //新建SgConfig
-            SgConfig sgConfig = new SgConfig();
-            sgConfig.appName = this.appName;
-            sgConfig.appGroupName = this.appGroupName;
-            sgConfig.serverAddresses = this.serverAddresses;
-            sgConfig.protocol = this.protocol;
-            sgConfig.token = this.token;
-            sgConfig.serverAddressConfigs = this.serverAddressConfigs;
-            return sgConfig;
-        }
-
-        private void validateAppName(String appName) {
-            //校验非空
-            Assert.notNull(appName, "appName不能为空");
-            //校验长度
-            Assert.isFalse(appName.length() < LENGTH_MIN_NAME, "appName不能小于{}个字符", LENGTH_MIN_NAME);
-            Assert.isFalse(appName.length() > LENGTH_MAX_NAME, "appName不能大于{}个字符", LENGTH_MAX_NAME);
-            //校验格式
-            Assert.isTrue(PATTERN_NAME.matcher(appName).matches(), "appName只能包含数字、字母、中划线、下划线");
-        }
-
-        private void validateAppGroupName(String appGroupName) {
-            if (appGroupName == null) {
-                return;
-            }
-            //校验长度
-            Assert.isFalse(appName.length() < LENGTH_MIN_NAME, "appGroupName不能小于{}个字符", LENGTH_MIN_NAME);
-            Assert.isFalse(appName.length() > LENGTH_MAX_NAME, "appGroupName不能大于{}个字符", LENGTH_MAX_NAME);
-            //校验格式
-            Assert.isTrue(PATTERN_NAME.matcher(appGroupName).matches(), "appGroupName只能包含数字、字母、中划线、下划线");
+            ServerConfig serverConfig = new ServerConfig();
+            serverConfig.serverAddresses = this.serverAddresses;
+            serverConfig.protocol = this.protocol;
+            serverConfig.token = this.token;
+            serverConfig.serverAddressConfigs = this.serverAddressConfigs;
+            return serverConfig;
         }
 
         private void validateServerAddresses(String serverAddresses) {
@@ -288,7 +198,6 @@ public final class SgConfig {
             //校验格式
             Assert.isTrue(PATTERN_TOKEN.matcher(token).matches(), "token只能包含数字、字母");
         }
-
     }
 
 }

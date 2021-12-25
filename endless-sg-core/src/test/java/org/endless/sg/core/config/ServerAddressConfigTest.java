@@ -12,11 +12,11 @@ public class ServerAddressConfigTest extends BaseTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerAddressConfigTest.class);
 
-
     @Test
     @DisplayName("testServerAddressConfig")
     public void testServerAddressConfig() {
-        //使用域名合法创建ServerAddressConfig
+        //创建合法ServerAddressConfig
+        //使用域名创建合法ServerAddressConfig
         try {
             ServerAddressConfig serverAddressConfig = new ServerAddressConfig("www.sg.endless.org");
             Assertions.assertTrue(serverAddressConfig.isDomainName());
@@ -24,14 +24,7 @@ public class ServerAddressConfigTest extends BaseTest {
         } catch (Exception e) {
             Assertions.fail(e);
         }
-        //使用域名非法创建ServerAddressConfig
-        try {
-            new ServerAddressConfig("error");
-            Assertions.fail();
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-        }
-        //使用IP:PORT合法创建ServerAddressConfig
+        //使用IP:PORT创建合法ServerAddressConfig
         try {
             ServerAddressConfig serverAddressConfig = new ServerAddressConfig("127.0.0.1:80");
             Assertions.assertFalse(serverAddressConfig.isDomainName());
@@ -40,9 +33,9 @@ public class ServerAddressConfigTest extends BaseTest {
         } catch (Exception e) {
             Assertions.fail(e);
         }
-        //使用IP:PORT非法创建ServerAddressConfig
+        //创建非法ServerAddressConfig
         try {
-            new ServerAddressConfig("127.0.0.1:65536");
+            new ServerAddressConfig("error");
             Assertions.fail();
         } catch (Exception e) {
             LOG.error(e.getMessage());
@@ -54,7 +47,13 @@ public class ServerAddressConfigTest extends BaseTest {
             LOG.error(e.getMessage());
         }
         try {
-            new ServerAddressConfig("error");
+            new ServerAddressConfig("127.0.0.1:65536");
+            Assertions.fail();
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+        }
+        try {
+            new ServerAddressConfig("127.0.0.1:error");
             Assertions.fail();
         } catch (Exception e) {
             LOG.error(e.getMessage());

@@ -19,7 +19,6 @@ public abstract class BaseTest {
      */
     private static final String DELIMITER = "-------";
 
-
     @BeforeEach
     public void beforeEach(TestInfo testInfo) {
         LOG.info("start test {}:{}{}", getClassName(testInfo), getMethodName(testInfo), DELIMITER);
